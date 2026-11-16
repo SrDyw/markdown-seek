@@ -1,0 +1,32 @@
+<Window x:Class="MarkdownSeek.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        Title="Markdown Seek" Height="720" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        AllowDrop="True" Drop="Window_Drop">
+    <Window.InputBindings>
+        <KeyBinding Key="F5" Command="NavigationCommands.Refresh" />
+    </Window.InputBindings>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Open" Executed="Open_Executed" />
+        <CommandBinding Command="NavigationCommands.Refresh" Executed="Reload_Executed" />
+    </Window.CommandBindings>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Archivo">
+                <MenuItem Header="_Abrir..." Command="ApplicationCommands.Open" InputGestureText="Ctrl+O" />
+                <MenuItem Header="_Recargar" Command="NavigationCommands.Refresh" InputGestureText="F5" />
+                <Separator />
+                <MenuItem Header="_Salir" Click="Exit_Click" />
+            </MenuItem>
+            <MenuItem Header="_Opciones">
+                <MenuItem Header="Establecer como app predeterminada para .md" Click="SetDefault_Click" />
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock x:Name="StatusText" Text="Abre o arrastra un archivo .md" />
+        </StatusBar>
+        <wv2:WebView2 x:Name="Browser" />
+    </DockPanel>
+</Window>
